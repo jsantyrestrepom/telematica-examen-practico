@@ -1,46 +1,40 @@
 /* variables */
 var fs = require('fs'),
 assert = require('assert'),
-restify = require('restify'),
-EventEmitter = require('events').EventEmitter,
-filesEE = new EventEmitter();
-
+restify = require('restify');
 
 
 /* methods */
-/*filesEE.on('files_ready', function(){
-    console.log(listFiles);
-});*/
-
-exports.list = function (req, res, callback) {
+exports.list = function (callback) {
     listFiles = '{ "files" : [';
-    var arr = [];
-    var sharedir = ['/home/lcamach1/jsrm', 'home/lcamach1/jsrm/webimagen'];
+    var sharedir = ['/home/lcamach1/jsrm', '/home/lcamach1/jsrm/webimagen'],
+    files = 'null';
     sharedir.forEach(function(dir){
-	arr = listarArchivos(dir);
-	console.log(arr);
-	//listFiles += ;
-	console.log('> '+ dir + ' leido');
-	//filesEE.emit('files_ready');
-	console.log('> ' + listFiles);
-    listFiles += '] }'; 
+	files = loaddirSync(dir + '/');	
+	listFiles += files;
+    });
+    if (files == 'null') listFiles += '] }';
+    else listFiles = listFiles.substring(0, listFiles.length - 1) + '] }';;
     callback(listFiles);
-    });
-    //listFiles = listFiles.substring(0,listFiles.length-1);
-   
-};
-
-
-//sync
-function listarArchivos(dir) {
-    console.log('> leyendo ' + dir);
-    return fs.readdirSync(dir).filter(function(filename){
-	return fs.statSync(filename).isFile();
-    });
 }
-//async
-/*
-function listarArchivos(dir, callback) {
+
+
+// sync version
+function loaddirSync(dir) {
+    var files, jfiles = '';
+    console.log('> leyendo ' + dir);
+    files = fs.readdirSync(dir).filter(function(filename){
+	return fs.statSync(dir + filename).isFile();
+    });
+    files.forEach(function(f){
+	jfiles += '{ "filename" : "' + f + '", "url" : "' + f + '" },';
+    });
+    console.log('> '+ dir +' leido');
+    return jfiles;
+}
+
+// async version
+function loaddirAsync(dir, callback) {
     console.log('> leyendo ' + dir);
     fs.readdir(dir, function(err, files){
 	var listFiles = '';
@@ -54,4 +48,3 @@ function listarArchivos(dir, callback) {
 	callback(listFiles);
     });
 };
-*/
