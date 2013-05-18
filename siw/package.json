@@ -1,0 +1,11 @@
+{
+	"namen" : "SIW-telematica",
+	"description" : "Web application that integrate saw components",
+	"version" : "0.0.1",
+	"dependencies" : {
+		       "express" : "3.0.0",
+		       "ejs" : "latest",
+		       "restify" : "2.5.x",
+		       "xml2js" : "latest"
+	}
+}

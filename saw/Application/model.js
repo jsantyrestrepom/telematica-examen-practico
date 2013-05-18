@@ -1,25 +1,41 @@
-/* variables */
+    /* variables */
 var fs = require('fs'),
-assert = require('assert'),
-restify = require('restify');
+    assert = require('assert'),
+    restify = require('restify'),
+    xml2js = require('xml2js'),
+    parser = new xml2js.Parser();
 
 
-/* methods */
+    /* methods */
 exports.list = function (callback) {
     listFiles = '{ "files" : [';
-    var sharedir = ['/home/lcamach1/jsrm', '/home/lcamach1/jsrm/webimagen'],
-    files = 'null';
-    sharedir.forEach(function(dir){
-	files = loaddirSync(dir + '/');	
-	listFiles += files;
+    var files = 'null';
+    readXML(function(sharedir){
+        sharedir.forEach(function(dir){
+            files = loaddirSync(dir + '/'); 
+            listFiles += files;
+        });
+        if (files == 'null')
+            listFiles += '] }';
+        else
+            listFiles = listFiles.substring(0, listFiles.length - 1) + '] }';;
+        callback(listFiles);
     });
-    if (files == 'null') listFiles += '] }';
-    else listFiles = listFiles.substring(0, listFiles.length - 1) + '] }';;
-    callback(listFiles);
 }
 
 
-// sync version
+function readXML(callback) {
+    console.log('> reading sharedirs.xml ....');
+    fs.readFile(__dirname + '/public/sharedirs.xml', function(err, data) {
+        parser.parseString(data, function (err, result) {
+            console.log(result.dirs.dir);
+            callback(result.dirs.dir);
+        });
+    });
+}
+
+
+    // sync version
 function loaddirSync(dir) {
     var files, jfiles = '';
     console.log('> leyendo ' + dir);
@@ -33,7 +49,7 @@ function loaddirSync(dir) {
     return jfiles;
 }
 
-// async version
+    // async version
 function loaddirAsync(dir, callback) {
     console.log('> leyendo ' + dir);
     fs.readdir(dir, function(err, files){
