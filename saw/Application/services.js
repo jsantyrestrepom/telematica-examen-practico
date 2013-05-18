@@ -25,7 +25,7 @@ exports.list = function (callback) {
 
 
 function readXML(callback) {
-    console.log('> reading sharedirs.xml ....');
+    console.log('> Reading sharedirs.xml ....');
     fs.readFile(__dirname + '/public/sharedirs.xml', function(err, data) {
         parser.parseString(data, function (err, result) {
             console.log(result.dirs.dir);
@@ -38,29 +38,29 @@ function readXML(callback) {
     // sync version
 function loaddirSync(dir) {
     var files, jfiles = '';
-    console.log('> leyendo ' + dir);
+    console.log('> Reading ' + dir);
     files = fs.readdirSync(dir).filter(function(filename){
-	return fs.statSync(dir + filename).isFile();
+	   return fs.statSync(dir + filename).isFile();
     });
     files.forEach(function(f){
-	jfiles += '{ "filename" : "' + f + '", "url" : "' + f + '" },';
+	   jfiles += '{ "filename" : "' + f + '", "url" : "' + f + '" },';
     });
-    console.log('> '+ dir +' leido');
+    console.log('> '+ dir +' readed');
     return jfiles;
 }
 
     // async version
-function loaddirAsync(dir, callback) {
-    console.log('> leyendo ' + dir);
-    fs.readdir(dir, function(err, files){
-	var listFiles = '';
-	if (err) throw err;
-	files.forEach(function(file){
-	    //console.log(file);
-	    listFiles += '{filename : ' + file + ', url : ' + __dirname + dir + '/' + file + '},\n';
-	   // callback(listFiles);
-	});
-	//console.log(listFiles);
-	callback(listFiles);
-    });
-};
+// function loaddirAsync(dir, callback) {
+//     console.log('> Reading ' + dir);
+//     fs.readdir(dir, function(err, files){
+// 	var listFiles = '';
+// 	if (err) throw err;
+// 	files.forEach(function(file){
+// 	    //console.log(file);
+// 	    listFiles += '{filename : ' + file + ', url : ' + __dirname + dir + '/' + file + '},\n';
+// 	   // callback(listFiles);
+// 	});
+// 	//console.log(listFiles);
+// 	callback(listFiles);
+//     });
+// };

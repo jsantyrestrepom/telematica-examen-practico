@@ -1,4 +1,4 @@
-/* variables */
+	/* variables */
 var express = require('express'),
 routes = require('./routes'),
 app = express(),
@@ -8,17 +8,16 @@ server.listen(8080);
 console.log('=> server running ....');
 
 
-/* configuration */
+	/* configuration */
 app.configure(function(){
     app.set('view engine', 'ejs');
-    app.set('views', __dirname + '/view');
+    app.set('views', __dirname + '/views');
     app.use(express.bodyParser());
     app.use('/static', express.static(__dirname + '/public'));
 });
 
 
-/* paths */
+	/* paths */
 app.get('/', routes.index);
-
-
-/* test */
+app.get('/list', routes.list);
+//app.get('/find', routes);

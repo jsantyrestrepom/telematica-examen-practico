@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" >
+	<title>Examen Practico</title>
+</head>
+<body>
+	<div class="container" >
+	<div id="options" >
+		<lu>
+			<li><a href="http://localhost:8080/list" >LISTAR</a></li>
+			<li><form action="localhost:8080/find" method="get" >
+				<label for="pattern" >Palabras Claves:</label>
+				<input type="text" name="pattern" id="pattern" />
+				<input type="submit" name="buscar" value="BUSCAR" />
+			</form></li>
+		</lu>
+	</div>
+	<div id="filesList" >
+		<hr/>
+		<lu>
+			<% for (var i = 0; i < filesList.length; i ++) { %>
+				<li> <a href="<%= filesList[i].url %>" > <%= filesList[i].filename %> </a></li>
+			<% } %>
+		</lu>
+	</div>
+	</div>
+</body>
+</html>
