@@ -10,7 +10,7 @@ var fs = require('fs'),
 exports.list = function (callback) {
     listFiles = '{ "files" : [';
     var files = 'null';
-    readXML(function(sharedir){
+    readdirXML(function(sharedir){
         sharedir.forEach(function(dir){
             files = loaddirSync(dir + '/'); 
             listFiles += files;
@@ -24,7 +24,7 @@ exports.list = function (callback) {
 }
 
 
-function readXML(callback) {
+function readdirXML(callback) {
     console.log('> Reading sharedirs.xml ....');
     fs.readFile(__dirname + '/public/sharedirs.xml', function(err, data) {
         parser.parseString(data, function (err, result) {

@@ -13,7 +13,7 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 server.listen(8081, function(){
-	console.log('%s listening at %s', server.name, server.url);
+	console.log('%s listening at %s \n', server.name, server.url);
 })
 
 
@@ -26,7 +26,7 @@ server.get('/echo/:name', function(req, res, next){		// test
 server.get('/list', function(req, res, next){
     console.log('=> Service called !');
     services.list(function(data){
-    	console.log('> Sending response !')
+    	console.log('=> Sending response !\n')
 		res.send({'list' : JSON.parse(data)});
 		return next();
     });	

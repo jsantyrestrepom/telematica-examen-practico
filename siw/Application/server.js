@@ -5,7 +5,7 @@ app = express(),
 server = require('http').createServer(app);
 
 server.listen(8080);
-console.log('=> server running ....');
+console.log('=> server running .... \n');
 
 
 	/* configuration */
