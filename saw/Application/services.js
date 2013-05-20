@@ -42,17 +42,18 @@ function loaddirSync(dir) {
     files = fs.readdirSync(dir).filter(function(filename){
 	   return fs.statSync(dir + filename).isFile();
     });
-    files.forEach(function(f){
-	   jfiles += '{ "filename" : "' + f + '", "url" : "' + f + '" },';
+    files.forEach(function(file){
+	   jfiles += '{ "filename" : "' + file + '", "url" : "' + /*dir +*/ file + '" },';
     });
     console.log('> '+ dir +' readed');
+    console.log(jfiles);
     return jfiles;
 }
 
     // async version
 // function loaddirAsync(dir, callback) {
 //     console.log('> Reading ' + dir);
-//     fs.readdir(dir, function(err, files){
+//     function() {};s.readdir(dir, function(err, files){
 // 	var listFiles = '';
 // 	if (err) throw err;
 // 	files.forEach(function(file){

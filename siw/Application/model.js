@@ -13,10 +13,12 @@ exports.listClient = function(req, res, callback) {
 		sawList.forEach(function(saw){
 			callService(saw, function(files){
 				listFiles = listFiles.concat(files);
+				callback(listFiles);
 			});
 			console.log(listFiles);
+			//callback(listFiles);
 		});
-		callback(listFiles);
+		//callback(listFiles);
 	});
 }
 

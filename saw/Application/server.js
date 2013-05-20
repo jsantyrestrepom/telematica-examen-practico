@@ -14,7 +14,7 @@ server.use(restify.bodyParser());
 
 server.listen(8081, function(){
 	console.log('%s listening at %s \n', server.name, server.url);
-})
+});
 
 
 	/* paths */
@@ -31,3 +31,11 @@ server.get('/list', function(req, res, next){
 		return next();
     });	
 });
+
+
+// var express = require('express'),
+// 	app = express(),
+// 	downloadServer = require('http').createServer(app);
+// downloadServer.listen(8084);
+// app.use(express.directory('C:\\Users\\Fredy\\Pictures'));
+// console.log('C:\\Users\\Fredy\\Pictures');
