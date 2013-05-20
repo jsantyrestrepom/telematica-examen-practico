@@ -1,8 +1,8 @@
 	/* variables */
 var express = require('express'),
-routes = require('./routes'),
-app = express(),
-server = require('http').createServer(app);
+	routes = require('./routes'),
+	app = express(),
+	server = require('http').createServer(app);
 
 server.listen(8080);
 console.log('=> server running .... \n');
@@ -20,4 +20,4 @@ app.configure(function(){
 	/* paths */
 app.get('/', routes.index);
 app.get('/list', routes.list);
-//app.get('/find', routes);
+app.get('/find?', routes.find);

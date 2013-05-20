@@ -8,12 +8,15 @@
 	<div class="container" >
 	<div id="options" >
 		<lu>
-			<li><a href="http://localhost:8080/list" >LISTAR</a></li>
-			<li><form action="localhost:8080/find" method="get" >
-				<label for="pattern" >Palabras Claves:</label>
-				<input type="text" name="pattern" id="pattern" />
-				<input type="submit" name="buscar" value="BUSCAR" />
-			</form></li>
+			<li><a href="http://<%= hostname %>:8080/list" >LISTAR</a></li>
+			<li>
+				<form action="http://<%= hostname %>:8080/find" method="get" >
+					<label for="pattern" >Palabras Claves:</label>
+					<input type="text" name="pattern" id="pattern" />
+					<input type="submit" name="buscar" value="BUSCAR" />
+					<span id="message" > <%= message %> </span>
+				</form>
+			</li>
 		</lu>
 	</div>
 	<div id="filesList" >
